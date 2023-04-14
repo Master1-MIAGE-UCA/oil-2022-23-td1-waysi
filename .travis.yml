@@ -1,3 +1,5 @@
 language: java
 jdk:
   - amazon-corretto-17
+before_install:
+  - chmod +x mvnw
