@@ -1,5 +1,5 @@
 language: java
 jdk:
-  - amazon-corretto-17
+  - openjdk19
 before_install:
   - chmod +x mvnw
