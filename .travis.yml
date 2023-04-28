@@ -1,5 +1,17 @@
 language: java
 jdk:
   - openjdk19
+
+env:
+  - APPARIEMENT_PORT=8080
+  - HEBERGEMENT_PORT=8091
+  - JOUEUR_PORT=8081
 before_install:
   - chmod +x mvnw
+
+script:
+  - mvn clean install -DskipTests=true
+  - mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=$APPARIEMENT_PORT -pl appariement&
+  - sleep 10
+  - mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=$HEBERGEMENT_PORT -pl hebergement &
+  - mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=$JOUEUR_PORT -pl joueur &

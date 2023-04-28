@@ -11,6 +11,12 @@
     <groupId>com.example</groupId>
     <artifactId>projet-Yams</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>joueur</module>
+        <module>hebergeur</module>
+        <module>appariement</module>
+    </modules>
+    <packaging>pom</packaging>
     <name>projet-Yams</name>
     <description>projet-Yams</description>
     <properties>
@@ -36,10 +42,8 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>3.0.5</version>
                     <configuration>
-                        <mainClass>com.example.projetyams.ProjetYamsApplication</mainClass>
                     </configuration>
                 </plugin>
             </plugins>
         </build>
-
 </project>
