@@ -11,8 +11,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Hebergeur</artifactId>
-    <name>Hebergeur</name>
+    <artifactId>hebergeur</artifactId>
+    <name>hebergeur</name>
     <description>Hebergeur application</description>
 
     <dependencies>

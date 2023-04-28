@@ -11,8 +11,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Joueur</artifactId>
-    <name>Joueur</name>
+    <artifactId>joueur</artifactId>
+    <name>joueur</name>
     <description>Joueur application</description>
 
     <dependencies>

@@ -11,8 +11,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Appariement</artifactId>
-    <name>Appariement</name>
+    <artifactId>appariement</artifactId>
+    <name>appariement</name>
     <description>Appariement application</description>
 
     <dependencies>
