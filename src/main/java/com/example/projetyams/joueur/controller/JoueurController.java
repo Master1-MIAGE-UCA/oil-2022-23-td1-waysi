@@ -12,16 +12,10 @@ import org.springframework.web.bind.annotation.*;
 public class JoueurController {
     @Autowired
     private JoueurService joueurService;
-
-    private Joueur joueur = new Joueur("joueurTest", (long) (Math.random() * 1000));
-    @GetMapping
-    public Joueur getJoueur(){
-        return joueur;
+    @Autowired
+    private Joueur joueur;
+    @GetMapping("/nom")
+    public String getNom() {
+        return joueur.getNom();
     }
-     @PutMapping
-        public ResponseEntity<Joueur> updateJoueur(@RequestBody Joueur joueurUpdated) {
-             joueur.setNom(joueurUpdated.getNom());
-            return ResponseEntity.ok(joueur);
-        }
-
 }
