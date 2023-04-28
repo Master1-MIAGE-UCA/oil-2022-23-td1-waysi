@@ -1,9 +1,10 @@
 package com.example.projetyams.hebergeur.model;
 
 import com.example.projetyams.joueur.model.Joueur;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-
+@Component
 public class Hebergeur {
     private long idHebergeur;
     private int nbPartie;

@@ -30,5 +30,10 @@ public class AppariementController {
         appariement.getJoueurs().add(url);
         System.out.println(appariement.getJoueurs());
     }
+    @PostMapping("/appariement/hebergeurs")
+    public void ajouterHebergeur(@RequestBody String url){
+        appariement.getHebergeurs().add(url);
+        System.out.println(appariement.getHebergeurs());
+    }
     
 }
