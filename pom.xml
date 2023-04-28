@@ -12,9 +12,9 @@
     <artifactId>projet-Yams</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>src/main/java/com/example/projetyams/joueur</module>
-        <module>src/main/java/com/example/projetyams/hebergeur</module>
-        <module>src/main/java/com/example/projetyams/appariement</module>
+        <module>joueur</module>
+        <module>hebergeur</module>
+        <module>appariement</module>
     </modules>
     <packaging>pom</packaging>
     <name>projet-Yams</name>
@@ -42,7 +42,6 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>3.0.5</version>
                     <configuration>
-                        <mainClass>com.example.projetyams.ProjetYamsApplication</mainClass>
                     </configuration>
                 </plugin>
             </plugins>
