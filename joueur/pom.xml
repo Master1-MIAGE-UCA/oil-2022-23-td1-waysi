@@ -31,7 +31,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>3.0.5</version>
                 <configuration>
-                    <mainClass>com.example.projetyams.joueur.JoueurApp</mainClass>
+                    <mainClass>jeu.joueur.JoueurApp</mainClass>
                 </configuration>
             </plugin>
         </plugins>

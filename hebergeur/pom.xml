@@ -31,7 +31,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>3.0.5</version>
                 <configuration>
-                    <mainClass>com.example.projetyams.hebergeur.HebergeurApp</mainClass>
+                    <mainClass>jeu.hebergeur.HebergeurApp</mainClass>
                 </configuration>
             </plugin>
         </plugins>
