@@ -35,5 +35,14 @@ public class AppariementController {
         appariement.getHebergeurs().add(url);
         System.out.println(appariement.getHebergeurs());
     }
+
+/*
+    @PostMapping("/appariement/probas")
+    public void ajouterProba(@RequestBody String url){
+        appariement.getProbas.add(url);
+        System.out.println(appariement.getProba());
+    }
+*/
+
     
 }

@@ -6,6 +6,7 @@ env:
   - APPARIEMENT_PORT=8080
   - HEBERGEMENT_PORT=8091
   - JOUEUR_PORT=8081
+  - Proba_PORT=8082
 before_install:
   - chmod +x mvnw
 

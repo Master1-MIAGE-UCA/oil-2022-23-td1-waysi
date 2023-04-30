@@ -6,10 +6,13 @@ public class Appariement {
     private String nom;
     private ArrayList<String> Joueurs;
     private ArrayList<String> Hebergeurs;
+
+    private ArrayList<String> Probas;
     public Appariement() {
         this.nom = "Appariement";
         this.Joueurs = new ArrayList<>();
         this.Hebergeurs = new ArrayList<>();
+        this.Probas = new ArrayList<>();
     }
 
     public String getNom() {
@@ -30,4 +33,14 @@ public class Appariement {
     public void setHebergeurs(ArrayList<String> hebergeurs) {
         Hebergeurs = hebergeurs;
     }
+
+
+    public ArrayList<String> getProbas() {
+        return Probas;
+    }
+    public void setProbas(ArrayList<String> probas) {
+        Probas = probas;
+    }
+
 }
+

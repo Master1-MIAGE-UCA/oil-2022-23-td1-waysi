@@ -8,8 +8,8 @@
         <version>3.0.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>projet-Yams</artifactId>
+    <groupId>yams</groupId>
+    <artifactId>yams</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>joueur</module>
