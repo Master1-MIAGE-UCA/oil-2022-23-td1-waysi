@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class HebergeurService {
     public Hebergeur creerHebergeur() {
         Hebergeur hebergeur = new Hebergeur();
-        hebergeur.setIdHebergeur((long) (Math.random() * 1000));
+//        hebergeur.setIdHebergeur((long) (Math.random() * 1000));
         return hebergeur;
     }
 //    public Joueur ajouterJoueur(Long idHebergeur, Joueur joueur) {

@@ -1,4 +1,5 @@
 package jeu.hebergeur.model;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -6,7 +7,7 @@ import java.util.ArrayList;
 public class Hebergeur {
     private int nbPartie;
     private int nbJoueurMax;
-    private ArrayList<String> joueurs;
+    private ArrayList<String> joueurs = new ArrayList<>();
 
     private boolean isFull = false;
 

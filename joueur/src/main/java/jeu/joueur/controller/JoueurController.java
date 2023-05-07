@@ -17,4 +17,10 @@ public class JoueurController {
     public String getNom() {
         return joueur.getNom();
     }
+
+    @PostMapping("/hebergeur")
+    public void ajouterHebergeur(@RequestBody String urlHebergeur){
+        joueur.getHebergeurs().add(urlHebergeur);
+        System.out.println("Vous avez été ajouté à l'hébergeur");
+    }
 }
