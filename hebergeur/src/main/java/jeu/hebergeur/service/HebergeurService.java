@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Service
@@ -24,6 +25,11 @@ public class HebergeurService {
         restTemplate.postForEntity(urlJoueur + "/lancerDes", des, Void.class);
     }
 
+    public HashMap<Integer, Integer> relancerDes(String urlJoueur, HashMap<Integer, Integer> des){
+        ArrayList desSelectionnes = restTemplate.postForObject(urlJoueur + "/relancerDes", des, ArrayList.class);
+        return null;
+    }
+
     public void jouerTour() {
         HashMap<String, HashMap<Integer, Integer>> mainJoueurs = new HashMap<>();
         for (String urlJoueur : hebergeur.getJoueurs()) {
@@ -39,6 +45,10 @@ public class HebergeurService {
              */
             System.out.println("Envoi des dés au joueur " + urlJoueur);
             envoyerScore(urlJoueur, des);
+            /**
+             * Demande de relance des dés
+             */
+
         }
     }
 }

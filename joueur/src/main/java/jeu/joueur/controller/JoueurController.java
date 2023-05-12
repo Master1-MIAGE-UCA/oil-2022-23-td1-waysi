@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @RestController
@@ -30,5 +31,10 @@ public class JoueurController {
     @PostMapping("/lancerDes")
     public void lancerDes(@RequestBody HashMap<Integer,Integer> listeDes){
         System.out.println("Les dés sont " + listeDes);
+    }
+    @PostMapping("/relancerDes")
+    public ArrayList<Integer> relancerDes(@RequestBody HashMap<Integer,Integer> listeDes){
+        System.out.println("Les dés sont " + listeDes);
+        return null;
     }
 }
