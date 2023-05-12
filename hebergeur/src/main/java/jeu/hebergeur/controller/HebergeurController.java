@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import static java.lang.Thread.sleep;
+
 @RestController
 @RequestMapping("/hebergeur")
 public class HebergeurController {
@@ -19,12 +21,18 @@ public class HebergeurController {
         return this.hebergeur;
     }
     @PostMapping("/joueurs")
-    public void ajouterJoueur(@RequestBody String urlJoueur){
+    public void ajouterJoueur(@RequestBody String urlJoueur) throws InterruptedException {
         hebergeur.getJoueurs().add(urlJoueur);
         String nomJoueur = restTemplate.getForObject(urlJoueur + "/nom", String.class);
         System.out.println("Le joueur " + nomJoueur + " a été ajouté à l'hébergeur");
         if(hebergeur.getJoueurs().size() == hebergeur.getNbJoueurMax()){
+            sleep(1000);
             hebergeur.setIsFull(true);
+            System.out.println("L'hébergeur est plein");
+            System.out.println("Lancement de la partie");
+            hebergeur.setNbTour(hebergeur.getNbTour() + 1);
+            System.out.println("Tour " + hebergeur.getNbTour());
+            hebergeurService.jouerTour();
         }
     }
 }

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 public class Hebergeur {
     private int nbPartie;
     private int nbJoueurMax;
+
+    private int nbTour = 0;
     private ArrayList<String> joueurs = new ArrayList<>();
 
     private boolean isFull = false;
@@ -35,6 +37,13 @@ public class Hebergeur {
     }
     public void setIsFull(boolean isFull){
         this.isFull = isFull;
+    }
+
+    public int getNbTour(){
+        return nbTour;
+    }
+    public void setNbTour(int nbTour){
+        this.nbTour = nbTour;
     }
 
 }
