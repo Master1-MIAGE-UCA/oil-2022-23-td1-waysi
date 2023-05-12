@@ -8,8 +8,8 @@
         <version>3.0.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>yams</groupId>
-    <artifactId>yams</artifactId>
+    <groupId>com.example</groupId>
+    <artifactId>projet-Yams</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>joueur</module>
@@ -36,15 +36,15 @@
         </dependency>
     </dependencies>
 
-        <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>3.0.5</version>
-                    <configuration>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </build>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.0.5</version>
+                <configuration>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

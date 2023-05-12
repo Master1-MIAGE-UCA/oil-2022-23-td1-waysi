@@ -17,8 +17,8 @@ public class ProbaApp {
         return args -> {
             proba.setNom("Proba 1");
             String localhost = "http://localhost:";
-           // String port =args[0].split("=")[1];
-            String url = localhost + "8080" + "/proba";
+            String port =args[0].split("=")[1];
+            String url = localhost + port + "/proba";
             WebClient webClient = builder.baseUrl(url).build();
             webClient.post().uri("http://localhost:8080/appariement/probas")
                     .bodyValue(url).retrieve()

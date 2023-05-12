@@ -36,13 +36,13 @@ public class AppariementController {
         System.out.println(appariement.getHebergeurs());
     }
 
-/*
+
     @PostMapping("/appariement/probas")
     public void ajouterProba(@RequestBody String url){
-        appariement.getProbas.add(url);
-        System.out.println(appariement.getProba());
+        appariement.getProbas().add(url);
+        System.out.println(appariement.getProbas());
     }
-*/
+
 
     
 }
