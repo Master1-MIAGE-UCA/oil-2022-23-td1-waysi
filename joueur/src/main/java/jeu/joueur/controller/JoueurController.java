@@ -18,6 +18,9 @@ public class JoueurController {
         return joueur.getNom();
     }
 
+    @GetMapping("/id")
+    public Integer getId() { return joueur.getIdJoueur();}
+
     @PostMapping("/hebergeur")
     public void ajouterHebergeur(@RequestBody String urlHebergeur){
         joueur.getHebergeurs().add(urlHebergeur);
