@@ -11,6 +11,12 @@
     <groupId>com.example</groupId>
     <artifactId>projet-Yams</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>joueur</module>
+        <module>hebergeur</module>
+        <module>appariement</module>
+    </modules>
+    <packaging>pom</packaging>
     <name>projet-Yams</name>
     <description>projet-Yams</description>
     <properties>
@@ -19,7 +25,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
         <dependency>
@@ -35,8 +41,9 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>3.0.5</version>
+                    <configuration>
+                    </configuration>
                 </plugin>
             </plugins>
         </build>
-
 </project>
