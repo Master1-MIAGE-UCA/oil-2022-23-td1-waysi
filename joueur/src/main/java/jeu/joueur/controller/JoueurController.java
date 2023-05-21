@@ -53,10 +53,14 @@ public class JoueurController {
             desSelectionnes.add(keyChoisie);
             keys.remove(randomIndex);
         }
-//        for(int key : desSelectionnes){
-//            int value = listeDes.get(key);
-//            System.out.println("Relance le dés: "+ key);
-//        }
         return desSelectionnes;
+    }
+
+    @PostMapping("/choisirCombinaison")
+    public String choisirCombinaison(@RequestBody HashMap<String, Boolean> combinaisons){
+        Random random = new Random();
+        int choixCombinaison = random.nextInt(combinaisons.size());
+        List<String> cles = new ArrayList<>(combinaisons.keySet());
+        return cles.get(choixCombinaison);
     }
 }
