@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
 
 @RestController
 @RequestMapping("/joueur")
@@ -32,9 +35,28 @@ public class JoueurController {
     public void lancerDes(@RequestBody HashMap<Integer,Integer> listeDes){
         System.out.println("Les dés sont " + listeDes);
     }
+    @PostMapping("/scoreRelance")
+    public void scoreRelance(@RequestBody HashMap<Integer,Integer> listeDes){
+        System.out.println("Les dés sont  " + listeDes+ " après relance");
+    }
     @PostMapping("/relancerDes")
-    public ArrayList<Integer> relancerDes(@RequestBody HashMap<Integer,Integer> listeDes){
-        System.out.println("Les dés sont " + listeDes);
-        return null;
+    public List<Integer> relancerDes(@RequestBody HashMap<Integer,Integer> listeDes){
+        List<Integer> keys = new ArrayList<>(listeDes.keySet());
+
+        //Choisir un nombre alétoire de dès à relancer
+        Random random = new Random();
+        int nbRelance = random.nextInt(5) + 1;
+        List<Integer> desSelectionnes = new ArrayList<>();
+        for(int i = 0; i < nbRelance; i++){
+            int randomIndex = random.nextInt(keys.size());
+            int keyChoisie = keys.get(randomIndex);
+            desSelectionnes.add(keyChoisie);
+            keys.remove(randomIndex);
+        }
+//        for(int key : desSelectionnes){
+//            int value = listeDes.get(key);
+//            System.out.println("Relance le dés: "+ key);
+//        }
+        return desSelectionnes;
     }
 }

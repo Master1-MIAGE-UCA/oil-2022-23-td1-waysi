@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class HebergeurService {
@@ -21,13 +22,23 @@ public class HebergeurService {
             des.put(i, (int) (Math.floor(Math.random() * 6) + 1));
         return des;
     }
-    public void envoyerScore(String urlJoueur, HashMap<Integer, Integer> des){
-        restTemplate.postForEntity(urlJoueur + "/lancerDes", des, Void.class);
+    public void envoyerScore(String urlJoueur, HashMap<Integer, Integer> des, boolean premierlance){
+        if(premierlance){
+            restTemplate.postForEntity(urlJoueur + "/lancerDes", des, Void.class);
+        }
+        else{
+            restTemplate.postForEntity(urlJoueur + "/scoreRelance", des, Void.class);
+        }
     }
 
     public HashMap<Integer, Integer> relancerDes(String urlJoueur, HashMap<Integer, Integer> des){
-        ArrayList desSelectionnes = restTemplate.postForObject(urlJoueur + "/relancerDes", des, ArrayList.class);
-        return null;
+        List<Integer> desSelectionnes = restTemplate.postForObject(urlJoueur + "/relancerDes", des, List.class);
+        for (Integer desSelectionne : desSelectionnes) {
+            des.put(desSelectionne, (int) (Math.floor(Math.random() * 6) + 1));
+        }
+        System.out.println("Les dés relancés sont "+ desSelectionnes);
+        System.out.println("Liste des dés après relance " + des);
+        return des;
     }
 
     public void jouerTour() {
@@ -44,11 +55,12 @@ public class HebergeurService {
              * Envoyer les résultats des dés à chaque joueur
              */
             System.out.println("Envoi des dés au joueur " + urlJoueur);
-            envoyerScore(urlJoueur, des);
+            envoyerScore(urlJoueur, des, true);
             /**
              * Demande de relance des dés
              */
-
+            des = relancerDes(urlJoueur, des);
+            envoyerScore(urlJoueur, des, false);
         }
     }
 }
