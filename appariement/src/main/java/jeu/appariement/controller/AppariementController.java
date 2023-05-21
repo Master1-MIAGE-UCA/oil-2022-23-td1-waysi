@@ -39,16 +39,24 @@ public class AppariementController {
         else {
             restTemplate.postForObject(url+"/hebergeur", hebergeurValide, Void.class);
         }
-        boolean isHebergeurPlein = Boolean.TRUE.equals(restTemplate.getForObject(hebergeurValide + "/isFull", Boolean.class));
-        if(isHebergeurPlein){
-            System.out.println("L'hébergeur est plein, la partie va commencer");
-            restTemplate.postForObject(hebergeurValide + "/lancerPartie", null, Void.class);
-        }
     }
-    @PostMapping(" ")
+    @PostMapping("hebergeurs")
     public void ajouterHebergeur(@RequestBody String url){
         appariement.getHebergeurs().add(url);
         System.out.println(appariement.getHebergeurs());
     }
+
+//    @PostMapping("/{idHebergeur}/ajouterJoueur")
+//    public void attribuerJoueur(@PathVariable String hebergeurUri, @RequestBody String joueurUrl){
+//        String urlHebergeur = hebergeurUri + "/joueurs";
+//        try{
+//            restTemplate.postForObject(urlHebergeur, joueurUrl, Void.class);
+//            System.out.println("Le joueur a bien été ajouté à l'hébergeur");
+//        }
+//        catch (Exception e){
+//            System.out.println("Erreur lors de l'ajout du joueur à l'hébergeur : " + e.getMessage());
+//        }
+//
+//    }
     
 }
