@@ -16,7 +16,7 @@ public class HebergeurApp {
     @Bean
     public CommandLineRunner initialisation(Hebergeur hebergeur, WebClient.Builder builder){
         return args -> {
-            hebergeur.setNbJoueurMax(3);
+            hebergeur.setNbJoueurMax(2);
             hebergeur.setNbPartie(0);
             String url = "http://localhost:";
             String port =args[0].split("=")[1];
