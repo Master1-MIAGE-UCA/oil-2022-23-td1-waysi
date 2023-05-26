@@ -77,6 +77,12 @@ public class HebergeurService {
             case "quatre" -> calculDesPoints.calculMineur(des, 4);
             case "cinq" -> calculDesPoints.calculMineur(des, 5);
             case "six" -> calculDesPoints.calculMineur(des, 6);
+            case "brelan" -> calculDesPoints.calculMemeValeur(des, 3, false);
+            case "carre" -> calculDesPoints.calculMemeValeur(des, 4, false);
+            case "full" -> calculDesPoints.calculMemeValeur(des, 3, true);
+            case "petiteSuite" -> calculDesPoints.calculSuite(des, 4);
+            case "grandeSuite" -> calculDesPoints.calculSuite(des, 5);
+            case "yams" -> calculDesPoints.calculMemeValeur(des, 5, false);
             default -> 0;
         };
     }
