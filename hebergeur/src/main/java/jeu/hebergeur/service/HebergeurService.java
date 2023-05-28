@@ -26,21 +26,21 @@ public class HebergeurService {
         return des;
     }
 
-    public HashMap<String, Boolean> remplirCombinaisons() {
-        HashMap<String, Boolean> combinaisons = new HashMap<>();
-        combinaisons.put("as", false);
-        combinaisons.put("deux", false);
-        combinaisons.put("trois", false);
-        combinaisons.put("quatre", false);
-        combinaisons.put("cinq", false);
-        combinaisons.put("six", false);
-        combinaisons.put("brelan", false);
-        combinaisons.put("carre", false);
-        combinaisons.put("full", false);
-        combinaisons.put("petiteSuite", false);
-        combinaisons.put("grandeSuite", false);
-        combinaisons.put("yahtzee", false);
-        combinaisons.put("chance", false);
+    public HashMap<Figures, Boolean> remplirCombinaisons() {
+        HashMap<Figures, Boolean> combinaisons = new HashMap<>();
+        combinaisons.put(Figures.AS, false);
+        combinaisons.put(Figures.DEUX, false);
+        combinaisons.put(Figures.TROIS, false);
+        combinaisons.put(Figures.QUATRE, false);
+        combinaisons.put(Figures.CINQ, false);
+        combinaisons.put(Figures.SIX, false);
+        combinaisons.put(Figures.BRELAN, false);
+        combinaisons.put(Figures.CARRE, false);
+        combinaisons.put(Figures.FULL, false);
+        combinaisons.put(Figures.PETITE_SUITE, false);
+        combinaisons.put(Figures.GRANDE_SUITE, false);
+        combinaisons.put(Figures.YAHTZEE, false);
+        combinaisons.put(Figures.CHANCE, false);
         return combinaisons;
     }
 
@@ -63,22 +63,30 @@ public class HebergeurService {
         return des;
     }
 
-    public String choisirCombinaison(String urlJoueur, HashMap<String, Boolean> combinaisons) {
+    public String choisirCombinaison(String urlJoueur, HashMap<Figures, Boolean> combinaisons) {
         String combinaisonChoisie = restTemplate.postForObject(urlJoueur + "/choisirCombinaison", combinaisons, String.class);
         System.out.println("La combinaison choisie est " + combinaisonChoisie);
         return combinaisonChoisie;
     }
 
-    public int calculerScore(String urlJoueur, String combinaisonChoisie, HashMap<Integer, Integer> des) {
-        return switch (combinaisonChoisie) {
-            case "as" -> calculDesPoints.calculMineur(des, 1);
-            case "deux" -> calculDesPoints.calculMineur(des, 2);
-            case "trois" -> calculDesPoints.calculMineur(des, 3);
-            case "quatre" -> calculDesPoints.calculMineur(des, 4);
-            case "cinq" -> calculDesPoints.calculMineur(des, 5);
-            case "six" -> calculDesPoints.calculMineur(des, 6);
-            default -> 0;
+    public int calculerScore(String urlJoueur, Figures combinaisonChoisie, HashMap<Integer, Integer> des) {
+        int score = 0;
+         switch (combinaisonChoisie) {
+             case AS -> score = calculDesPoints.calculMineur(des, 1);
+             case DEUX -> score = calculDesPoints.calculMineur(des, 2);
+             case TROIS -> score = calculDesPoints.calculMineur(des, 3);
+             case QUATRE -> score = calculDesPoints.calculMineur(des, 4);
+             case CINQ ->score =  calculDesPoints.calculMineur(des, 5);
+             case SIX -> score = calculDesPoints.calculMineur(des, 6);
+             case BRELAN -> score = calculDesPoints.calculMemeValeur(des, 3, false);
+             case CARRE ->score =  calculDesPoints.calculMemeValeur(des, 4, false);
+             case FULL -> score = calculDesPoints.calculMemeValeur(des, 3, true);
+             case PETITE_SUITE -> score = calculDesPoints.calculSuite(des, 4);
+             case GRANDE_SUITE -> score = calculDesPoints.calculSuite(des, 5);
+             case YAHTZEE  -> score = calculDesPoints.calculMemeValeur(des, 5, false);
+             case CHANCE -> score = calculDesPoints.calculChance(des);
         };
+         return score;
     }
 
     public void jouerTour() {
@@ -89,7 +97,7 @@ public class HebergeurService {
              */
             System.out.println("Lancement des dés pour le joueur " + urlJoueur);
             HashMap<Integer, Integer> des = lancerDes();
-            HashMap<String, Boolean> combinaisons = remplirCombinaisons();
+            HashMap<Figures, Boolean> combinaisons = remplirCombinaisons();
 
             System.out.println("Les dés sont : " + des);
             mainJoueurs.put(urlJoueur, des);
@@ -107,9 +115,14 @@ public class HebergeurService {
              * Choix de la combinaison
              */
             System.out.println("Choix de la combinaison pour le joueur " + urlJoueur);
-            String combinaisonChoisie = choisirCombinaison(urlJoueur, combinaisons);
+            Figures combinaisonChoisie = Figures.valueOf(choisirCombinaison(urlJoueur, combinaisons));
             combinaisons.put(combinaisonChoisie, true);
-            calculerScore(urlJoueur, combinaisonChoisie, des);
+            int score = calculerScore(urlJoueur, combinaisonChoisie, des);
+            System.out.println("Le score du joueur " + urlJoueur + " est " + score);
+            /**
+             * Envoi du score au joueur
+             */
+            restTemplate.postForEntity(urlJoueur + "/score", score, Void.class);
         }
     }
 }

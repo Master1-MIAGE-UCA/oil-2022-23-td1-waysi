@@ -61,6 +61,12 @@ public class JoueurController {
         Random random = new Random();
         int choixCombinaison = random.nextInt(combinaisons.size());
         List<String> cles = new ArrayList<>(combinaisons.keySet());
+        System.out.printf("Vous avez choisi la combinaison %s\n", cles.get(choixCombinaison));
         return cles.get(choixCombinaison);
+    }
+
+    @PostMapping("/score")
+    public void score(@RequestBody int score){
+        System.out.println("Votre score est de " + score);
     }
 }
