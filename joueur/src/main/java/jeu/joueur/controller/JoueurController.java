@@ -63,4 +63,9 @@ public class JoueurController {
         List<String> cles = new ArrayList<>(combinaisons.keySet());
         return cles.get(choixCombinaison);
     }
+
+    @PostMapping("/score")
+    public void score(@RequestBody int score){
+        System.out.println("Votre score est de " + score);
+    }
 }

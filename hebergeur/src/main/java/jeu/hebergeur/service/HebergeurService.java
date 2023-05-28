@@ -70,21 +70,23 @@ public class HebergeurService {
     }
 
     public int calculerScore(String urlJoueur, String combinaisonChoisie, HashMap<Integer, Integer> des) {
-        return switch (combinaisonChoisie) {
-            case "as" -> calculDesPoints.calculMineur(des, 1);
-            case "deux" -> calculDesPoints.calculMineur(des, 2);
-            case "trois" -> calculDesPoints.calculMineur(des, 3);
-            case "quatre" -> calculDesPoints.calculMineur(des, 4);
-            case "cinq" -> calculDesPoints.calculMineur(des, 5);
-            case "six" -> calculDesPoints.calculMineur(des, 6);
-            case "brelan" -> calculDesPoints.calculMemeValeur(des, 3, false);
-            case "carre" -> calculDesPoints.calculMemeValeur(des, 4, false);
-            case "full" -> calculDesPoints.calculMemeValeur(des, 3, true);
-            case "petiteSuite" -> calculDesPoints.calculSuite(des, 4);
-            case "grandeSuite" -> calculDesPoints.calculSuite(des, 5);
-            case "yams" -> calculDesPoints.calculMemeValeur(des, 5, false);
-            default -> 0;
+        int score = 0;
+         switch (combinaisonChoisie) {
+            case "as" -> score = calculDesPoints.calculMineur(des, 1);
+            case "deux" -> score = calculDesPoints.calculMineur(des, 2);
+            case "trois" -> score = calculDesPoints.calculMineur(des, 3);
+            case "quatre" -> score = calculDesPoints.calculMineur(des, 4);
+            case "cinq" ->score =  calculDesPoints.calculMineur(des, 5);
+            case "six" -> score = calculDesPoints.calculMineur(des, 6);
+            case "brelan" -> score = calculDesPoints.calculMemeValeur(des, 3, false);
+            case "carre" ->score =  calculDesPoints.calculMemeValeur(des, 4, false);
+            case "full" -> score = calculDesPoints.calculMemeValeur(des, 3, true);
+            case "petiteSuite" -> score = calculDesPoints.calculSuite(des, 4);
+            case "grandeSuite" -> score = calculDesPoints.calculSuite(des, 5);
+            case "yams" -> score = calculDesPoints.calculMemeValeur(des, 5, false);
+            case "chance" -> score = calculDesPoints.calculChance(des);
         };
+         return score;
     }
 
     public void jouerTour() {
@@ -115,7 +117,12 @@ public class HebergeurService {
             System.out.println("Choix de la combinaison pour le joueur " + urlJoueur);
             String combinaisonChoisie = choisirCombinaison(urlJoueur, combinaisons);
             combinaisons.put(combinaisonChoisie, true);
-            calculerScore(urlJoueur, combinaisonChoisie, des);
+            int score = calculerScore(urlJoueur, combinaisonChoisie, des);
+            System.out.println("Le score du joueur " + urlJoueur + " est " + score);
+            /**
+             * Envoi du score au joueur
+             */
+            restTemplate.postForEntity(urlJoueur + "/score", score, Void.class);
         }
     }
 }
