@@ -61,6 +61,7 @@ public class JoueurController {
         Random random = new Random();
         int choixCombinaison = random.nextInt(combinaisons.size());
         List<String> cles = new ArrayList<>(combinaisons.keySet());
+        System.out.printf("Vous avez choisi la combinaison %s\n", cles.get(choixCombinaison));
         return cles.get(choixCombinaison);
     }
 
