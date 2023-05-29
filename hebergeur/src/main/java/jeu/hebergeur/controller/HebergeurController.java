@@ -20,6 +20,10 @@ public class HebergeurController {
     public @ResponseBody Hebergeur afficherDetailsHebergeur(){
         return this.hebergeur;
     }
+    @GetMapping("/isFull")
+    public @ResponseBody boolean isFull(){
+        return this.hebergeur.getIsFull();
+    }
     @PostMapping("/joueurs")
     public void ajouterJoueur(@RequestBody String urlJoueur) throws InterruptedException {
         hebergeur.getJoueurs().add(urlJoueur);
@@ -29,10 +33,14 @@ public class HebergeurController {
             sleep(1000);
             hebergeur.setIsFull(true);
             System.out.println("L'hébergeur est plein");
-            System.out.println("Lancement de la partie");
-            hebergeur.setNbTour(hebergeur.getNbTour() + 1);
-            System.out.println("Tour " + hebergeur.getNbTour());
-            hebergeurService.jouerTour();
         }
+    }
+
+    @PostMapping("/lancerPartie")
+    public void lancerPartie(){
+        System.out.println("Lancement de la partie");
+        hebergeur.setNbTour(hebergeur.getNbTour() + 1);
+        System.out.println("Tour " + hebergeur.getNbTour());
+        hebergeurService.jouerTour();
     }
 }
