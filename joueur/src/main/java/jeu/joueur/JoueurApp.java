@@ -6,8 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.net.InetAddress;
+import java.net.URL;
 
 @SpringBootApplication
 public class JoueurApp {
@@ -33,33 +35,31 @@ public class JoueurApp {
                     .block();
 
 
-
-
             /**
              * Docker
              */
             /*
-            System.out.println(args.length);
+            System.out.println("args.length =  " + args[0]);
             joueur.setNom("Joueur 1");
-            if (args.length > 0) {
-
-                if (args.length > 1) {
-                    port =args[1];
-
+                if (args.length > 0) {
+                    port =args[0];
+                    String url = args[0];
+                    URL parseUrl = new URL(url);
+                    int portTest = parseUrl.getPort();
                     String myIp = InetAddress.getLocalHost().getHostAddress();
-                    String myUrl = "http://"+myIp+":"+port;
-
+                    System.out.println("myIp" + myIp);
+                    String myUrl = "http://"+myIp+":"+String.valueOf(portTest);
                     WebClient webClient = builder.baseUrl(port).build();
-                    System.out.println("builder.baseUrl(port).build()" + builder.baseUrl(port).build());
-                    webClient.post().uri(myUrl+"/appariement/joueurs")
-                            .bodyValue(port).retrieve()
-                            .bodyToMono(Void.class)
+                    System.out.println("myUrl" + myUrl);
+
+                    webClient.post().uri("/appariement/joueurs")
+                            .body(Mono.just(myUrl), String.class)
+                            .retrieve().bodyToMono(String.class)
                             .block();
                 }
 
-            }
-
              */
+
 
             /**
              * Docker
