@@ -1,7 +1,9 @@
 package jeu.appariement.controller;
 import jeu.appariement.model.Appariement;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
 
 @RestController
 @RequestMapping("/appariement")
@@ -45,18 +47,13 @@ public class AppariementController {
         appariement.getHebergeurs().add(url);
         System.out.println(appariement.getHebergeurs());
     }
+    @PostMapping("/probas")
+    public void ajouterProba(@RequestBody String probaUrl){
+        appariement.getProbas().add(probaUrl);
+        String probaValue = restTemplate.getForObject(probaUrl, String.class);
+        System.out.println("La probabilité " + probaValue + " a été ajoutée à l'appariement");
+    }
 
-//    @PostMapping("/{idHebergeur}/ajouterJoueur")
-//    public void attribuerJoueur(@PathVariable String hebergeurUri, @RequestBody String joueurUrl){
-//        String urlHebergeur = hebergeurUri + "/joueurs";
-//        try{
-//            restTemplate.postForObject(urlHebergeur, joueurUrl, Void.class);
-//            System.out.println("Le joueur a bien été ajouté à l'hébergeur");
-//        }
-//        catch (Exception e){
-//            System.out.println("Erreur lors de l'ajout du joueur à l'hébergeur : " + e.getMessage());
-//        }
-//
-//    }
-    
+
+
 }
