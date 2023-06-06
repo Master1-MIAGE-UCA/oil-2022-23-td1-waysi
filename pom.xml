@@ -15,6 +15,7 @@
         <module>joueur</module>
         <module>hebergeur</module>
         <module>appariement</module>
+        <module>commun</module>
     </modules>
     <packaging>pom</packaging>
     <name>projet-Yams</name>

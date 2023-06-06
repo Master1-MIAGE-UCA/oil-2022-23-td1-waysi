@@ -1,4 +1,4 @@
-package jeu.hebergeur.service;
+package com.example;
 
 public enum Figures {
     AS,

@@ -39,8 +39,10 @@ public class HebergeurController {
     @PostMapping("/lancerPartie")
     public void lancerPartie(){
         System.out.println("Lancement de la partie");
-        hebergeur.setNbTour(hebergeur.getNbTour() + 1);
-        System.out.println("Tour " + hebergeur.getNbTour());
-        hebergeurService.jouerTour();
+        for(int i = 0; i<13; i++){
+            hebergeur.setNbTour(hebergeur.getNbTour() + 1);
+            System.out.println("Tour " + hebergeur.getNbTour());
+            hebergeurService.jouerTour();
+        }
     }
 }
