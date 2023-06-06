@@ -45,7 +45,7 @@ public class AppariementController {
             restTemplate.postForObject(hebergeurValide + "/lancerPartie", null, Void.class);
         }
     }
-    @PostMapping(" ")
+    @PostMapping("/hebergeurs")
     public void ajouterHebergeur(@RequestBody String url){
         appariement.getHebergeurs().add(url);
         System.out.println(appariement.getHebergeurs());

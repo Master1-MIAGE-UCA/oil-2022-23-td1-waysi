@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import com.example.Figures;
 
 
 @RestController
@@ -57,10 +58,10 @@ public class JoueurController {
     }
 
     @PostMapping("/choisirCombinaison")
-    public String choisirCombinaison(@RequestBody HashMap<String, Boolean> combinaisons){
+    public Figures choisirCombinaison(@RequestBody HashMap<Figures, Boolean> combinaisons){
         Random random = new Random();
         int choixCombinaison = random.nextInt(combinaisons.size());
-        List<String> cles = new ArrayList<>(combinaisons.keySet());
+        List<Figures> cles = new ArrayList<>(combinaisons.keySet());
         System.out.printf("Vous avez choisi la combinaison %s\n", cles.get(choixCombinaison));
         return cles.get(choixCombinaison);
     }
