@@ -21,50 +21,22 @@ public class JoueurApp {
     }
 
     @Bean
-    public CommandLineRunner initialisation(Joueur joueur, WebClient.Builder builder){
+    public CommandLineRunner initialisation(Joueur joueur, WebClient.Builder builder, @Value("${SERVER_IP}") String serverIp, @Value("${SERVER_PORT}") String serverPort){
         return args -> {
 
             joueur.setNom("Joueur 1");
-            String localhost = "http://localhost:";
-            String port =args[0].split("=")[1];
-            String url = localhost + port + "/joueur";
-            WebClient webClient = builder.baseUrl(url).build();
-            webClient.post().uri("http://localhost:8080/appariement/joueurs")
-                    .bodyValue(url).retrieve()
-                    .bodyToMono(Void.class)
+            String myIp = InetAddress.getLocalHost().getHostAddress();
+            String myUrl = "http://"+myIp+":"+serverPort +"/joueur";
+
+            WebClient webClient = builder.baseUrl(serverIp).build();
+            System.out.println("Url du joueur: " + myUrl);
+            System.out.println("Url de l'appariement: " + serverIp);
+
+            webClient.post().uri("appariement/joueurs")
+                    .bodyValue(myUrl)
+                    .retrieve().bodyToMono(String.class)
                     .block();
-
-
-            /**
-             * Docker
-             */
-            /*
-            System.out.println("args.length =  " + args[0]);
-            joueur.setNom("Joueur 1");
-                if (args.length > 0) {
-                    port =args[0];
-                    String url = args[0];
-                    URL parseUrl = new URL(url);
-                    int portTest = parseUrl.getPort();
-                    String myIp = InetAddress.getLocalHost().getHostAddress();
-                    System.out.println("myIp" + myIp);
-                    String myUrl = "http://"+myIp+":"+String.valueOf(portTest);
-                    WebClient webClient = builder.baseUrl(port).build();
-                    System.out.println("myUrl" + myUrl);
-
-                    webClient.post().uri("/appariement/joueurs")
-                            .body(Mono.just(myUrl), String.class)
-                            .retrieve().bodyToMono(String.class)
-                            .block();
-                }
-
-             */
-
-
-            /**
-             * Docker
-             */
-
         };
     }
+
 }

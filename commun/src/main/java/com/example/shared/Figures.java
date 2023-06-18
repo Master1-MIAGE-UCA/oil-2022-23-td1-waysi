@@ -1,4 +1,4 @@
-package com.example;
+package com.example.shared;
 
 public enum Figures {
     AS,
