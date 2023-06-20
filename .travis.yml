@@ -11,3 +11,6 @@ script:
   - docker build -t yams:joueur ./joueur
   - docker build -t yams:joueur2 ./joueur
   - docker build -t yams:hebergeur ./hebergeur
+  - docker-compose up -d
+  - sleep 30
+  - docker-compose down
