@@ -93,7 +93,10 @@ public class HebergeurService {
             case YAHTZEE  -> score = calculDesPoints.calculMemeValeur(des, 5, false);
             case CHANCE -> score = calculDesPoints.calculChance(des);
         };
-        return score;
+        int scoreActuel = hebergeur.getScoreJoueur(urlJoueur);
+        scoreActuel += score;
+        hebergeur.setScoreJoueur(urlJoueur, scoreActuel);
+        return scoreActuel;
     }
 
     public void jouerTour() {
@@ -102,6 +105,7 @@ public class HebergeurService {
             if(hebergeur.getNbTour() == 1){
                 HashMap<Figures, Boolean> combinaisons = remplirCombinaisons();
                 hebergeur.setCombinaisonsJoueur(urlJoueur, combinaisons);
+                hebergeur.setScoreJoueur(urlJoueur, 0);
             }
             /**
              * Lancer les dés pour chaque joueur

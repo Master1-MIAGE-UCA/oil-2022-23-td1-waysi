@@ -1,5 +1,9 @@
 package jeu.joueur;
+import jeu.joueur.model.DifficulteJoueur;
 import jeu.joueur.model.Joueur;
+import jeu.joueur.service.JoueurAbstrait;
+import jeu.joueur.service.JoueurAleatoire;
+import jeu.joueur.service.JoueurIntelligent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +20,7 @@ public class JoueurApp {
 
     @Value("${server.port}")
     private String port;
+    public static JoueurAbstrait joueurAbstrait;
     public static void main(String[] args) {
         SpringApplication.run(JoueurApp.class, args);
     }
@@ -25,8 +30,10 @@ public class JoueurApp {
         return args -> {
 
             joueur.setNom("Joueur 1");
+            joueur.setDifficulteJoueur(jeu.joueur.model.DifficulteJoueur.ALEATOIRE);
             String myIp = InetAddress.getLocalHost().getHostAddress();
             String myUrl = "http://"+myIp+":"+serverPort +"/joueur";
+            init(joueur);
 
             WebClient webClient = builder.baseUrl(serverIp).build();
             System.out.println("Url du joueur: " + myUrl);
@@ -37,6 +44,17 @@ public class JoueurApp {
                     .retrieve().bodyToMono(String.class)
                     .block();
         };
+    }
+    public void init(Joueur joueur) {
+        if (joueur.getDifficulteJoueur() == DifficulteJoueur.ALEATOIRE) {
+            System.out.println("Joueur aléatoire");
+            JoueurApp.joueurAbstrait = new JoueurAleatoire();
+        }
+        else {
+            System.out.println("Joueur intelligent");
+            System.out.println(joueur.getDifficulteJoueur());
+            JoueurApp.joueurAbstrait = new JoueurIntelligent();
+        }
     }
 
 }
