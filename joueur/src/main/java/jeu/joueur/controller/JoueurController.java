@@ -1,17 +1,14 @@
 package jeu.joueur.controller;
 import jeu.joueur.model.Joueur;
 import jeu.joueur.service.JoueurService;
-import org.apache.logging.log4j.util.PerformanceSensitive;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import com.example.Figures;
+import com.example.shared.Figures;
 
 
 @RestController

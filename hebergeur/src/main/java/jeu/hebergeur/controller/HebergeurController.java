@@ -27,6 +27,7 @@ public class HebergeurController {
     @PostMapping("/joueurs")
     public void ajouterJoueur(@RequestBody String urlJoueur) throws InterruptedException {
         hebergeur.getJoueurs().add(urlJoueur);
+        System.out.println("Joueur connecté à l'hébergeur : "+ hebergeur.getJoueurs());
         String nomJoueur = restTemplate.getForObject(urlJoueur + "/nom", String.class);
         System.out.println("Le joueur " + nomJoueur + " a été ajouté à l'hébergeur");
         if(hebergeur.getJoueurs().size() == hebergeur.getNbJoueurMax()){

@@ -3,7 +3,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import com.example.Figures;
+import com.example.shared.Figures;
 
 @Component
 public class Hebergeur {
