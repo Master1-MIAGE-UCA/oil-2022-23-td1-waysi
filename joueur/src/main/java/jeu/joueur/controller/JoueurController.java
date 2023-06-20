@@ -50,7 +50,6 @@ public class JoueurController {
 
     @PostMapping("/relancerDes")
     public List<Integer> relancerDes(@RequestBody HashMap<Integer, Integer> listeDes) {
-        System.out.println(JoueurApp.joueurAbstrait);
         return JoueurApp.joueurAbstrait.relancerDes(listeDes);
     }
 

@@ -10,7 +10,6 @@ import java.util.Random;
 public class JoueurAleatoire extends JoueurAbstrait{
     @Override
     public List<Integer> relancerDes(HashMap<Integer, Integer> listeDes) {
-        System.out.println("INSIDE JoueurAleatoire.relancerDes");
         List<Integer> keys = new ArrayList<>(listeDes.keySet());
 
         //Choisir un nombre alétoire de dès à relancer
