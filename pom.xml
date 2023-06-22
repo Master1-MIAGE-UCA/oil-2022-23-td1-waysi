@@ -12,6 +12,7 @@
     <artifactId>projet-Yams</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
+        <module>commun</module>
         <module>joueur</module>
         <module>hebergeur</module>
         <module>appariement</module>
@@ -35,16 +36,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-        <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>3.0.5</version>
-                    <configuration>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </build>
 </project>
