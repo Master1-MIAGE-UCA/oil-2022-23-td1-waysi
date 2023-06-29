@@ -1,0 +1,57 @@
+version: '3'
+services:
+  appariement:
+    image: yams:appariement
+    container_name: appariement
+    networks:
+      testing_net:
+        ipv4_address: 172.29.0.3
+
+
+  joueur:
+    image: yams:joueur
+    environment:
+      - SERVER_IP=http://172.29.0.3:8080/
+      - SERVER_PORT=8082
+
+    depends_on:
+      - appariement
+    networks:
+      testing_net:
+
+  joueur2:
+    image: yams:joueur
+    environment:
+      - SERVER_IP=http://172.29.0.3:8080/
+      - SERVER_PORT=8083
+
+    depends_on:
+      - appariement
+    networks:
+      testing_net:
+
+
+  hebergeur:
+    image: yams:hebergeur
+    environment:
+      - SERVER_IP=http://172.29.0.3:8080/
+      - SERVER_PORT=8091
+    depends_on:
+      - appariement
+    networks:
+      testing_net:
+
+
+#  proba:
+#    image: yams:proba
+#    depends_on:
+#      - appariement
+#    networks:
+#      testing_net:
+
+networks:
+  testing_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.29.0.0/16
