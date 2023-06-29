@@ -2,7 +2,8 @@
 
 ### Diagramme général de l'architecture des services
 
-![img.png](Diagramme_architecture_YAMS.png)
+![image](https://github.com/Master1-MIAGE-UCA/oil-2022-23-td1-waysi/assets/90200913/37588bd9-6666-44a9-a534-360f75232113)
+
 
 ### Explication du rôle de chaque service / les échanges entre les services
 
