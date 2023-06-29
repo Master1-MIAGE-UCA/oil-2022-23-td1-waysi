@@ -1,4 +1,5 @@
 package jeu.hebergeur.model;
+import org.reactivestreams.Publisher;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -62,5 +63,6 @@ public class Hebergeur {
     public void setCombinaisonsJoueur(String joueur, HashMap<Figures, Boolean> combinaisons){
         combinaisonsJoueur.put(joueur, combinaisons);
     }
+
 
 }

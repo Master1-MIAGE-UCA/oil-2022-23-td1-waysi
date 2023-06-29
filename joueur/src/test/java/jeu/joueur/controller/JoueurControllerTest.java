@@ -9,8 +9,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -20,36 +23,40 @@ import java.util.HashMap;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-@WebMvcTest(JoueurController.class)
-class JoueurControllerTest {
+@SpringBootTest(args = "--server.port=8082")
+@AutoConfigureMockMvc
+public class JoueurControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private JoueurService joueurService;
-
-    @Mock
     private Joueur joueur;
+
+    @SpyBean
+    JoueurController joueurControlleur;
+
+
 
     @BeforeEach
     void setup() {
 
-        when(joueur.getNom()).thenReturn("Joueur1");
+        when(joueur.getNom()).thenReturn("Joueur");
     }
 
     @Test
     void testGetNom() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/joueur/nom"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("Joueur1"));
+                .andExpect(MockMvcResultMatchers.content().string("Joueur"));
     }
 
     @Test
     void testAjouterHebergeur() throws Exception {
-        String urlHebergeur = "http://example.com/hebergeur";
+        String urlHebergeur = "http://localhost:8080/appariement/hebergeurs";
         mockMvc.perform(MockMvcRequestBuilders.post("/joueur/hebergeur")
-                        .content(urlHebergeur))
+                        .content(urlHebergeur)
+                        .requestAttr("org.springframework.test.web.servlet.request.MockMvcRequestBuilders.args", new String[]{"--port=8080"}))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("Vous avez été ajouté à l'hébergeur"));
     }
