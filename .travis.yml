@@ -6,7 +6,7 @@ before_install:
   - chmod +x mvnw
 
 script:
-  - mvn clean install -DskipTests=true
+  - mvn clean install
   - docker build -t yams:appariement ./appariement
   - docker build -t yams:joueur ./joueur
   - docker build -t yams:joueur2 ./joueur
